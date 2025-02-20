@@ -1,5 +1,4 @@
 fastapi
 uvicorn
 gunicorn
-PyJWT
-hashlib
+PyJWT==2.9.0
