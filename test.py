@@ -7,6 +7,9 @@ import time
 from functools import wraps
 from typing import Any, Callable
 from fastapi.middleware.cors import CORSMiddleware
+import logging
+
+logger = logging.getLogger(__name__)
 app = FastAPI()
 
 # JWT Secret & Algorithm
@@ -39,6 +42,7 @@ def rate_limit(max_calls: int, period: int):
                 raise ValueError("Request has no client information")
 
             ip_address: str = request.client.host
+            logger.info(f"IP from api call : {ip_address}")
             unique_id: str = hashlib.sha256(ip_address.encode()).hexdigest()
 
             now = time.time()
